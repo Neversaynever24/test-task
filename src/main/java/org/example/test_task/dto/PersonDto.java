@@ -12,5 +12,5 @@ import java.util.Date;
 public class PersonDto {
     Long id;
     String name;
-    Date birthday;
+    Date birthDate;
 }

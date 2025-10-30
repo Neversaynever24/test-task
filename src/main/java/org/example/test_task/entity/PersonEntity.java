@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Table(name = "persons")
 @Entity
 @Data
@@ -19,4 +21,6 @@ public class PersonEntity {
     @Id
     @GeneratedValue
     private Long id;
+    private String name;
+    private Date birthDate;
 }

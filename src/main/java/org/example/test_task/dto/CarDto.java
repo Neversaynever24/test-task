@@ -10,5 +10,6 @@ import lombok.Value;
 public class CarDto {
     Long id;
     String model;
+    int horsepower;
     Long ownerId;
 }
