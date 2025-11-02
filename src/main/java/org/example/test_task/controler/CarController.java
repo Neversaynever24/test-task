@@ -2,6 +2,7 @@ package org.example.test_task.controler;
 
 import lombok.RequiredArgsConstructor;
 import org.example.test_task.dto.CarDto;
+import org.example.test_task.dto.PersonWithCarDto;
 import org.example.test_task.service.CarService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,6 @@ public class CarController {
     public ResponseEntity<CarDto> createCar(
             @RequestBody CarDto carDto
             ) {
-        return ResponseEntity.ok(carService.createCar());
+        return ResponseEntity.ok(carService.createCar(carDto));
     }
 }

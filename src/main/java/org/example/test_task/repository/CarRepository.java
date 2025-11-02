@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface CarRepository extends JpaRepository<CarEntity, Long> {
-    List<CarEntity> findByOwnerId(Long owner_id);
 }

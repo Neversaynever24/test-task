@@ -1,22 +1,21 @@
 package org.example.test_task.dto;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Value
 @Builder
-public class PersonDto {
-    Long id;
+public class PersonWithCarDto {
+    Long personId;
 
-    @NotNull
     String name;
 
-    @NotNull
     LocalDate birthDate;
+
+    List<CarDto> cars;
 }
