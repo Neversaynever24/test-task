@@ -2,6 +2,33 @@ plugins {
     java
     id("org.springframework.boot") version "3.5.7"
     id("io.spring.dependency-management") version "1.1.7"
+    id("jacoco")
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(false)
+        html.required.set(true)
+        csv.required.set(false)
+    }
+
+    classDirectories.setFrom(
+        files(classDirectories.files.map {
+            fileTree(it).apply {
+                exclude(
+                    "**/entity/**",
+                    "**/dto/**",
+                    "**/model/**",
+                    "**/*Application.class"
+                )
+            }
+        })
+    )
 }
 
 group = "org.example"
@@ -36,6 +63,6 @@ dependencies {
     testImplementation("com.h2database:h2")
 }
 
-tasks.withType<Test> {
+tasks.test {
     useJUnitPlatform()
 }

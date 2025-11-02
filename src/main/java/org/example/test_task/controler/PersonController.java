@@ -1,5 +1,6 @@
 package org.example.test_task.controler;
 
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.example.test_task.dto.CarDto;
 import org.example.test_task.dto.PersonDto;
@@ -18,13 +19,21 @@ public class PersonController {
     public ResponseEntity<PersonDto> createCar(
             @RequestBody PersonDto personDto
     ) {
-        return ResponseEntity.ok(personService.createPerson(personDto));
+        try {
+            return ResponseEntity.ok(personService.createPerson(personDto));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/personwithcars")
     public ResponseEntity<PersonWithCarDto> getPersonWithCar(
             @RequestParam Long personId
     ) {
-        return ResponseEntity.ok(personService.getPersonWithCars(personId));
+        try {
+            return ResponseEntity.ok(personService.getPersonWithCars(personId));
+        } catch (EntityExistsException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

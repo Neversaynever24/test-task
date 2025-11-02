@@ -1,6 +1,8 @@
 package org.example.test_task.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,8 @@ public class PersonDto {
     @NotNull
     String name;
 
+    @Past
+    @JsonFormat(pattern = "dd.MM.yyyy")
     @NotNull
     LocalDate birthDate;
 }

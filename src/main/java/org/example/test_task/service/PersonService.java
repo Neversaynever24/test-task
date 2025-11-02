@@ -8,6 +8,7 @@ import org.example.test_task.dto.PersonDto;
 import org.example.test_task.dto.PersonWithCarDto;
 import org.example.test_task.entity.PersonEntity;
 import org.example.test_task.mapper.CarMapper;
+import org.example.test_task.mapper.PersonMapper;
 import org.example.test_task.repository.CarRepository;
 import org.example.test_task.repository.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.List;
 public class PersonService {
     private final PersonRepository personRepository;
     private final CarMapper carMapper;
+    private final PersonMapper personMapper;
 
     public PersonDto createPerson(PersonDto personToCreate) {
         if (personToCreate.getId() != null) {
@@ -33,7 +35,7 @@ public class PersonService {
                 .build();
 
         personRepository.save(personEntityToSave);
-        return convertToPersonDto(personEntityToSave);
+        return personMapper.toPersonDto(personEntityToSave);
     }
 
     public PersonWithCarDto getPersonWithCars(Long personId) {
@@ -49,14 +51,6 @@ public class PersonService {
                 .name(personEntity.getName())
                 .birthDate(personEntity.getBirthDate())
                 .cars(carDtos)
-                .build();
-    }
-
-    private PersonDto convertToPersonDto(PersonEntity personEntity) {
-        return PersonDto.builder()
-                .id(personEntity.getId())
-                .name(personEntity.getName())
-                .birthDate(personEntity.getBirthDate())
                 .build();
     }
 }

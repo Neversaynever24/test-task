@@ -17,6 +17,10 @@ public class CarController {
     public ResponseEntity<CarDto> createCar(
             @RequestBody CarDto carDto
             ) {
-        return ResponseEntity.ok(carService.createCar(carDto));
+        try {
+            return ResponseEntity.ok(carService.createCar(carDto));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
