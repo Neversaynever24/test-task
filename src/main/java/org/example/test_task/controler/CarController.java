@@ -1,5 +1,6 @@
 package org.example.test_task.controler;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.test_task.dto.CarDto;
 import org.example.test_task.dto.PersonWithCarDto;
@@ -15,7 +16,7 @@ public class CarController {
 
     @PostMapping()
     public ResponseEntity<CarDto> createCar(
-            @RequestBody CarDto carDto
+            @RequestBody @Valid CarDto carDto
             ) {
         try {
             return ResponseEntity.ok(carService.createCar(carDto));

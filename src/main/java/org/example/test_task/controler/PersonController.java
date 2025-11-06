@@ -1,6 +1,7 @@
 package org.example.test_task.controler;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.test_task.dto.CarDto;
 import org.example.test_task.dto.PersonDto;
@@ -17,7 +18,7 @@ public class PersonController {
 
     @PostMapping("/person")
     public ResponseEntity<PersonDto> createCar(
-            @RequestBody PersonDto personDto
+            @RequestBody @Valid PersonDto personDto
     ) {
         try {
             return ResponseEntity.ok(personService.createPerson(personDto));
