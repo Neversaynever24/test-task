@@ -21,7 +21,7 @@ public class CarController {
 
     @PostMapping()
     public ResponseEntity<CarDto> createCar(
-            @RequestBody CarDto carDto
+            @RequestBody @Valid CarDto carDto
             ) {
         try {
             return ResponseEntity.ok(carService.createCar(carDto));
