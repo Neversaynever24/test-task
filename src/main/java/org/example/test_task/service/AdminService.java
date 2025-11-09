@@ -18,22 +18,22 @@ public class AdminService {
     private final PersonRepository personRepository;
 
     public String clearAll() {
-        carRepository.deleteAllInBatch();
+        carRepository.deleteAllInBatch(); // удаляем все данные из бд по очереди, сначала зависимые, потом остальные
         personRepository.deleteAllInBatch();
         return "All data cleared!";
     }
 
     public StatisticsDto getStatistics() {
-        Long personCount = personRepository.count();
+        Long personCount = personRepository.count(); // подсчитываем встроенными методами количество человек, а дальше машин
         Long carCount = carRepository.count();
 
-        List<CarEntity> allCars = carRepository.findAll();
-        Long uniqueVendorCount = allCars.stream()
+        List<CarEntity> allCars = carRepository.findAll();  // ищем все машины
+        Long uniqueVendorCount = allCars.stream() // находим уникальных производителей, сначала преобразовывая в нужный нам формат, потом с помошью dictinct лишних производителей убираем
                 .map(CarEntity::getVendor)
                 .distinct()
                 .count();
 
-        return StatisticsDto.builder()
+        return StatisticsDto.builder() // возвращаем готовый dto со статистикой
                 .personCount(personCount)
                 .carCount(carCount)
                 .uniqueVendorCount(uniqueVendorCount)

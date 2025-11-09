@@ -1,6 +1,7 @@
 package org.example.test_task.controler;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.test_task.dto.CarDto;
@@ -33,7 +34,11 @@ public class PersonController {
     ) {
         try {
             return ResponseEntity.ok(personService.getPersonWithCars(personId));
-        } catch (EntityExistsException e) {
+        }
+        catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntityExistsException e) {
             return ResponseEntity.badRequest().build();
         }
     }

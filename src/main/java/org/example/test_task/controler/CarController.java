@@ -1,5 +1,6 @@
 package org.example.test_task.controler;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.test_task.dto.CarDto;
@@ -25,7 +26,11 @@ public class CarController {
             ) {
         try {
             return ResponseEntity.ok(carService.createCar(carDto));
-        } catch (IllegalArgumentException e) {
+        }
+        catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+        catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
     }
